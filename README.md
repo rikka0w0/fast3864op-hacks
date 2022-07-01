@@ -4,9 +4,10 @@ There is an unsoldered 4-pin header (J708) near the power jack, which provides a
 user: admin
 password: 0ptU%1M5
 ```
-The management console offers a very limited set of commands, the `sh` command will drop you to a BusyBox Linux shell.
+If the above does not work, then try [the other keys](https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks).The management console offers a very limited set of commands, the `sh` command will drop you to a BusyBox Linux shell.
 
 # Known facts
+Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_bootlog.txt). The dumped stock firmware is also available in this repo, named `mtdblock?.bin`, where `?` is a number between 0 and 3. `cferam.000` and `vmlinux.lz` extracted from `mtdblock1.bin` seem to be the part of the CFE boot loader and the compressed Linux kernel, respectively.
 ## Hardware configuration
 1. CPU: BCM63168D0, MIPS: 400MHz, DDR: 400MHz, Bus: 200MHz
 2. RAM: [NT5CC64M16GP-DI](https://www.nanya.com/en/Product/3747/NT5CC64M16GP-DI), DDR3 128MB
@@ -25,6 +26,24 @@ Creating 6 MTD partitions on "brcmnand.0":
 0x000000020000-0x000003d80000 : "image"
 0x000003d80000-0x000007ae0000 : "image_update"
 ```
+1. `0x000000000000-0x000000020000 : "nvram"`: an 128kB partition with unclear layout, also known as "cferom" in OpenWRT, it stores the CFE bootloader. See `mtdblock0.bin`.
+2. `0x000000020000-0x000003d80000 : "rootfs"`: an 62846kB (61.375MB) JFFS2 partition, which holds the rootfs and the compressed kernel image. See `mtdblock1.bin`.
+3. `0x000003d80000-0x000007ae0000 : "rootfs_update"`: a blank 62846kB (61.375MB) JFFS2 partition, seems to be a good place to put the OpenWRT installation, so that we dont have to take the risk of brick the entire device.
+4. `0x000007b00000-0x000007f00000 : "data"`: an 256kB JFFS2 partition with unknown usage. See `mtdblock3.bin`.
+5. The "image" and "image_update" partitions are mapped to "rootfs" and "rootfs_update", respectively, not sure why they are there.
+
+# Current Progress
+The framework of the new device support has been made (see [the repo](https://github.com/rikka0w0/openwrt-fast3864op) and [work_with_openwrt.md](./work_with_openwrt.md) for instructions), including a patch for `board_bcm963xx.c`("openwrt/target/linux/bcm63xx/patches-5.4"), a new device tree("openwrt/target/linux/bcm63xx/dts/bcm63168-sagem-fast-3864op.dts"), a new make target("openwrt/target/linux/bcm63xx/image/bcm63xx_nand.mk", and new configuration scripts ("openwrt/target/linux/bcm63xx/base-files/etc/board.d/02_network").
+
+## What's working
+1. The WAN port is functional, by default, it acts as a DHCP client. Note that the WAN port LEDs are not functional at the moment, see TODO 1.
+2. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
+
+## TODOs
+1. __NONE of the LAN ports works once boot to the current OpenWRT build. (Fixing this should take the highest priority!)__ It is believed to be a device tree and boardinfo problem.
+2. LEDs are not defined in the device tree.
+3. WiFi does not work at the moment.
+4. ADSL/VDSL does not work.
 
 # References
 https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27

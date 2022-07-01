@@ -1,0 +1,516 @@
+Base: 4.14_04
+CFE version 8.353.1 for BCM963268 (32bit,SP,BE)
+Build Date: Sat Jul 23 18:46:20 CST 2016 (cookiechen@SZ01007.DONGGUAN.CN)
+Copyright (C) 2005-2011 SAGEM Corporation.
+
+Chip ID: BCM63168D0, MIPS: 400MHz, DDR: 400MHz, Bus: 200MHz
+Main Thread: TP0
+Memory Test Passed
+Total Memory: 134217728 bytes (128MB)
+Boot Address: 0xb8000000
+
+NAND flash device: , id 0xeff1 block 128KB size 131072KB
+External switch id = 53125
+Board IP address                  : 192.168.1.1:ffffff00
+Host IP address                   : 192.168.1.100
+Gateway IP address                :
+Run from flash/host/tftp (f/h/c)  : f
+Default host run file name        : vmlinux
+Default host flash file name      : bcm963xx_fs_kernel
+Boot delay (0-9 seconds)          : 1
+Boot image (0=latest, 1=previous) : 0
+Default host ramdisk file name    :
+Default ramdisk store address     :
+Board Id (0-38)                   : F@ST3864V2
+Number of MAC Addresses (1-32)    : 11
+Base MAC Address                  : d8:d7:75:13:03:72
+PSI Size (1-64) KBytes            : 40
+Enable Backup PSI [0|1]           : 0
+System Log Size (0-256) KBytes    : 0
+Auxillary File System Size Percent: 0
+Main Thread Number [0|1]          : 0
+GPON Serial Number                : "BRCM12345678"
+GPON Password                     : "          "
+Voice Board Configuration (0-0)   : SI32261
+
+*** Press any key to stop auto run (1 seconds) ***
+Auto run second count down: 0
+Booting from latest image (0xb8020000) ...
+Decompression OK!
+Entry at 0x803e3840
+Closing network.
+Disabling Switch ports.
+Flushing Receive Buffers...
+0 buffers found
+Closing DMA Channels
+Starting program at 0x803e3840
+Linux version 3.4.11-rt19 (cookiechen@SZ01007.DONGGUAN.CN) (gcc version 4.6.2 (Buildroot 2011.11) ) #1 SMP PREEMPT Sat Jul 23 18:52:40 CST 2016
+F@ST3864V2 prom init
+CPU revision is: 0002a080 (Broadcom BMIPS4350)
+DSL SDRAM reserved: 0x132000
+Determined physical RAM map:
+ memory: 07ece000 @ 00000000 (usable)
+Zone PFN ranges:
+  DMA      0x00000000 -> 0x00001000
+  Normal   0x00001000 -> 0x00007ece
+Movable zone start PFN for each node
+Early memory PFN ranges
+    0: 0x00000000 -> 0x00007ece
+On node 0 totalpages: 32462
+free_area_init_node: node 0, pgdat 804e7f80, node_mem_map 81000000
+  DMA zone: 32 pages used for memmap
+  DMA zone: 0 pages reserved
+  DMA zone: 4064 pages, LIFO batch:0
+  Normal zone: 222 pages used for memmap
+  Normal zone: 28144 pages, LIFO batch:7
+PERCPU: Embedded 7 pages/cpu @81103000 s5088 r8192 d15392 u32768
+pcpu-alloc: s5088 r8192 d15392 u32768 alloc=8*4096
+pcpu-alloc: [0] 0 [0] 1
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32208
+Kernel command line: ro noinitrd  irqaffinity=0
+PID hash table entries: 512 (order: -1, 2048 bytes)
+Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+Primary instruction cache 64kB, VIPT, 4-way, linesize 16 bytes.
+Primary data cache 32kB, 2-way, VIPT, cache aliases, linesize 16 bytes
+Memory: 123180k/129848k available (3972k kernel code, 6668k reserved, 990k data, 216k init, 0k highmem)
+Preemptible hierarchical RCU implementation.
+NR_IRQS:128
+console [ttyS0] enabled
+Allocating memory for DSP module core and initialization code
+Allocated DSP module memory - CORE=0x0 SIZE=0, INIT=0x0 SIZE=0
+Calibrating delay loop... 397.31 BogoMIPS (lpj=198656)
+pid_max: default: 32768 minimum: 301
+Mount-cache hash table entries: 512
+--Kernel Config--
+  SMP=1
+  PREEMPT=1
+  DEBUG_SPINLOCK=0
+  DEBUG_MUTEXES=0
+Broadcom Logger v0.1 Jul 23 2016 18:47:19
+CPU revision is: 0002a080 (Broadcom BMIPS4350)
+Primary instruction cache 64kB, VIPT, 4-way, linesize 16 bytes.
+Primary data cache 32kB, 2-way, VIPT, cache aliases, linesize 16 bytes
+Brought up 2 CPUs
+NET: Registered protocol family 16
+Internal 1P2 VREG will be shutdown if unused...Unused, turn it off (0000821f-00008226=-7<300)
+registering PCI controller with io_map_base unset
+registering PCI controller with io_map_base unset
+bio: create slab <bio-0> at 0
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+PCI host bridge to bus 0000:00
+pci_bus 0000:00: root bus resource [mem 0xa0f00000-0xa0ffffff]
+pci_bus 0000:00: root bus resource [io  0xa2000000-0xa200ffff]
+pci 0000:00:00.0: [14e4:435f] type 00 class 0x028000
+pci 0000:00:00.0: reg 10: [mem 0x10004000-0x10005fff]
+pci 0000:00:09.0: [14e4:6300] type 00 class 0x0c0310
+pci 0000:00:09.0: reg 10: [mem 0x10002600-0x100026ff]
+pci 0000:00:0a.0: [14e4:6300] type 00 class 0x0c0320
+pci 0000:00:0a.0: reg 10: [mem 0x10002500-0x100025ff]
+PCI host bridge to bus 0000:01
+pci_bus 0000:01: root bus resource [mem 0x11000000-0x11efffff]
+pci_bus 0000:01: root bus resource [??? 0x00000000 flags 0x0]
+pci 0000:01:00.0: [14e4:6326] type 01 class 0x060400
+pci 0000:01:00.0: PME# supported from D0 D3hot
+pci 0000:01:00.0: PCI bridge to [bus 02-02]
+bcmhs_spi bcmhs_spi.1: master is unqueued, this is deprecated
+bcmleg_spi bcmleg_spi.0: master is unqueued, this is deprecated
+skbFreeTask created successfully
+BLOG v3.0 Initialized
+BLOG Rule v1.0 Initialized
+Broadcom IQoS v0.1 Jul 23 2016 18:52:25 initialized
+Broadcom GBPM v0.1 Jul 23 2016 18:52:25 initialized
+NET: Registered protocol family 8
+NET: Registered protocol family 20
+Switching to clocksource MIPS
+NET: Registered protocol family 2
+IP route cache hash table entries: 1024 (order: 0, 4096 bytes)
+TCP established hash table entries: 4096 (order: 3, 32768 bytes)
+TCP bind hash table entries: 4096 (order: 3, 32768 bytes)
+TCP: Hash tables configured (established 4096 bind 4096)
+TCP: reno registered
+UDP hash table entries: 128 (order: 0, 4096 bytes)
+UDP-Lite hash table entries: 128 (order: 0, 4096 bytes)
+NET: Registered protocol family 1
+PCI: CLS mismatch (64 != 16), using 16 bytes
+bcm_tstamp initialized, (hpt_freq=200000000 2us_div=200 2ns_mult=5 2ns_shift=0)
+squashfs: version 4.0 (2009/01/31) Phillip Lougher
+jffs2: version 2.2. (NAND) © 2001-2006 Red Hat, Inc.
+fuse init (API version 7.18)
+msgmni has been set to 240
+io scheduler noop registered (default)
+Broadcom NAND controller (BrcmNand Controller)
+mtd->oobsize=0, mtd->eccOobSize=0
+NAND_CS_NAND_XOR=00000000
+B4: NandSelect=40000001, nandConfig=15142200, chipSelect=0
+brcmnand_read_id: CS0: dev_id=eff10095
+After: NandSelect=40000001, nandConfig=15142200
+DevId eff10095 may not be supported.  Will use config info
+Spare Area Size = 16B/512B
+Block size=00020000, erase shift=17
+NAND Config: Reg=15142200, chipSize=128 MB, blockSize=128K, erase_shift=11
+busWidth=1, pageSize=2048B, page_shift=11, page_mask=000007ff
+timing1 not adjusted: 6574845b
+timing2 not adjusted: 00001e96
+ECC level changed to 15
+OOB size changed to 16
+BrcmNAND mfg 0 0 UNSUPPORTED NAND CHIP 128MB on CS0
+
+Found NAND on CS0: ACC=f7ff1010, cfg=15142200, flashId=eff10095, tim1=6574845b, tim2=00001e96
+BrcmNAND version = 0x0400 128MB @00000000
+brcmnand_scan: B4 nand_select = 40000001
+brcmnand_scan: After nand_select = 40000001
+page_shift=11, bbt_erase_shift=17, chip_shift=27, phys_erase_shift=17
+Brcm NAND controller version = 4.0 NAND flash size 128MB @18000000
+ECC layout=brcmnand_oob_bch4_4k
+brcmnand_scan:  mtd->oobsize=64
+brcmnand_scan: oobavail=50, eccsize=512, writesize=2048
+brcmnand_scan, eccsize=512, writesize=2048, eccsteps=4, ecclevel=15, eccbytes=3
+-->brcmnand_default_bbt
+brcmnand_default_bbt: bbt_td = bbt_main_descr
+Bad block table Bbt0 found at page 0000ffc0, version 0x01 for chip on CS0
+Bad block table 1tbB found at page 0000ff80, version 0x01 for chip on CS0
+brcmnandCET: Status -> Deferred
+Creating 6 MTD partitions on "brcmnand.0":
+0x000000020000-0x000003d80000 : "rootfs"
+0x000003d80000-0x000007ae0000 : "rootfs_update"
+0x000007b00000-0x000007f00000 : "data"
+0x000000000000-0x000000020000 : "nvram"
+0x000000020000-0x000003d80000 : "image"
+0x000003d80000-0x000007ae0000 : "image_update"
+PPP generic driver version 2.4.2
+PPP BSD Compression module registered
+PPP Deflate Compression module registered
+NET: Registered protocol family 24
+usbcore: registered new interface driver cdc_ether
+usbcore: registered new interface driver cdc_ncm
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+PCI: Enabling device 0000:00:0a.0 (0000 -> 0002)
+ehci_hcd 0000:00:0a.0: setting latency timer to 64
+ehci_hcd 0000:00:0a.0: EHCI Host Controller
+ehci_hcd 0000:00:0a.0: new USB bus registered, assigned bus number 1
+ehci_hcd 0000:00:0a.0: Enabling legacy PCI PM
+ehci_hcd 0000:00:0a.0: irq 18, io mem 0x10002500
+ehci_hcd 0000:00:0a.0: USB f.f started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 2 ports detected
+generic_probe wake up Monitor!!
+message received before monitor task is initialized kerSysSendtoMonitorTask
+ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+PCI: Enabling device 0000:00:09.0 (0000 -> 0002)
+ohci_hcd 0000:00:09.0: setting latency timer to 64
+ohci_hcd 0000:00:09.0: OHCI Host Controller
+ohci_hcd 0000:00:09.0: new USB bus registered, assigned bus number 2
+ohci_hcd 0000:00:09.0: irq 17, io mem 0x10002600
+hub 2-0:1.0: USB hub found
+hub 2-0:1.0: 2 ports detected
+generic_probe wake up Monitor!!
+message received before monitor task is initialized kerSysSendtoMonitorTask
+usbcore: registered new interface driver usblp
+usbcore: registered new interface driver usbserial
+usbcore: registered new interface driver usbserial_generic
+USB Serial support registered for generic
+usbserial: USB Serial Driver core
+usbcore: registered new interface driver ipwtty
+USB Serial support registered for IPWireless converter
+usbcore: registered new interface driver option
+USB Serial support registered for GSM modem (1-port)
+usbcore: registered new interface driver qcserial
+USB Serial support registered for Qualcomm USB modem
+brcmboard: brcm_board_init entry
+SES: Button Interrupt 0x1 is enabled
+SES: LED GPIO 0xc000 is enabled
+Enable wifi on/off irq 0x2 success
+Serial: BCM63XX driver $Revision: 3.00 $
+Magic SysRq with Auxilliary trigger char enabled (type ^ h for list of supported commands)
+ttyS0 at MMIO 0xb0000180 (irq = 13) is a BCM63XX
+ttyS1 at MMIO 0xb00001a0 (irq = 42) is a BCM63XX
+Total # RxBds=1448
+bcmPktDmaBds_init: Broadcom Packet DMA BDs initialized
+
+bcmPktDma_init: Broadcom Packet DMA Library initialized
+bcmxtmrt: Broadcom BCM3168D0 ATM/PTM Network Device v0.5 Jul 23 2016 18:52:02
+IPSEC SPU: SUCCEEDED
+GACT probability NOT on
+Mirror/redirect action on
+u32 classifier
+    input device check on
+    Actions configured
+gre: GRE over IPv4 demultiplexor driver
+TCP: cubic registered
+Initializing XFRM netlink socket
+NET: Registered protocol family 10
+IPv6 over IPv4 tunneling driver
+NET: Registered protocol family 17
+NET: Registered protocol family 15
+Initializing MCPD Module
+Ebtables v2.0 registered
+ebt_time registered
+ebt_ftos registered
+ebt_wmm_mark registered
+L2TP core driver, V2.0
+PPPoL2TP kernel driver, V2.0
+8021q: 802.1Q VLAN Support v1.8
+VFS: Mounted root (jffs2 filesystem) readonly on device 31:0.
+Freeing unused kernel memory: 216k freed
+init started: BusyBox v1.17.2 (2016-07-23 18:57:58 CST)
+starting pid 271, tty '': '/bin/sh -l -c "bcm_boot_launcher start"'
+mount: mounting none on /proc/bus/usb failed: No such file or directory
+ip_gre: GRE over IPv4 tunneling driver
+Mounting filesystems...
+jffs2: Empty flash at 0x00026898 ends at 0x00027000
+jffs2: Empty flash at 0x000346f8 ends at 0x00034800
+Configuring system...
+Loading drivers and kernel modules...
+
+chipinfo: module license 'proprietary' taints kernel.
+Disabling lock debugging due to kernel taint
+brcmchipinfo: brcm_chipinfo_init entry
+Broadcom Ingress QoS Module  Char Driver v0.1 Jul 23 2016 18:48:36 Registered<243>
+
+Broadcom Ingress QoS ver 0.1 initialized
+BPM: tot_mem_size=134217728B (128MB), buf_mem_size <15%> =20132655B (19MB), num of buffers=9986, buf size=2016
+Broadcom BPM Module Char Driver v0.1 Jul 23 2016 18:47:37 Registered<244>
+NBUFF v1.0 Initialized
+Initialized fcache state
+Broadcom Packet Flow Cache  Char Driver v2.2 Jul 23 2016 18:48:38 Registered<242>
+Created Proc FS /procfs/fcache
+Broadcom Packet Flow Cache registered with netdev chain
+Broadcom Packet Flow Cache learning via BLOG enabled.
+[FHW]  pktDbgLvl[0xc0100390]=0
+[FHW]  fhw_construct:
+Initialized Fcache HW accelerator layer state
+flwStatsThread created
+Constructed Broadcom Packet Flow Cache v2.2 Jul 23 2016 18:48:38
+chipId 0x631680D0
+Broadcom Forwarding Assist Processor (FAP) Char Driver v0.1 Jul 23 2016 18:48:06 Registered <241>
+Enabling SMISBUS PHYS_FAP_BASE[0] is 0x10c01000
+FAP Soft Reset Done
+4ke Reset Done
+Enabling SMISBUS PHYS_FAP_BASE[1] is 0x10c01000
+FAP Soft Reset Done
+4ke Reset Done
+FAP Debug values at 0xa5e217a0 0xa5ea17a0
+fapGso_LoopBkThread created successfully
+Allocated FAP0 SWQ_HOST2FAP_GSO_LOOPBACK_Q mem=a5c64000 : 16384 bytes
+Allocated FAP0 SWQ_FAP2HOST_GSO_LOOPBACK_Q mem=a5dc4000 : 16384 bytes
+GSO LOOPBACK Cached HOST2FAP Q INFO:
+ Swq =b0825ee0 qStart=a5c64000 qEnd=a5c68000 msgSize=4 dqm=18 fapId=0
+GSO LOOPBACK Cached FAP2HOST Q INFO:
+ Swq =b0825ec0 qStart=a5dc4000 qEnd=a5dc8000 msgSize=2 dqm=19 fapId=0
+Allocated FAP0 TM SDRAM Queue Storage (a5e32830) : 390144 bytes @ a5f00000
+Allocated FAP1 TM SDRAM Queue Storage (a5eb2830) : 390144 bytes @ a5f80000
+[NTC fapProto] fapReset  : Reset FAP Protocol layer
+[FAP0] DSPRAM : stack <0x80000000><1536>, global <0x80000600><4280>, free <2376>, total<8192>
+[FAP1] DSPRAM : stack <0x80000000><1536>, global <0x80000600><4280>, free <2376>, total<8192>
+[FAP0] PSM : addr<0x80002000>, used <24320>, free <256>, total <24576>
+[FAP1] PSM : addr<0x80002000>, used <24320>, free <256>, total <24576>
+[FAP0] DQM : availableMemory 14660 bytes, nextByteAddress 0xE000489C
+[FAP1] DQM : availableMemory 14660 bytes, nextByteAddress 0xE000489C
+[FAP0] Initializing FAP4KE GSO LOOPBACK on fapIdx=0 ...
+[FAP0] SWQ: HOST2FAP_GSO_LOOPBACK
+[FAP0] >>>>------------------
+[FAP0] swq =80007ee0 msgSize =4 words , maxDepth=1024
+[FAP0] qStart =a5c64000 qEnd=a5c68000
+[FAP0] rdPtr =a5c64000 wrPtr=a5c64000 count=0
+[FAP0]  processed =0 dropped =0
+[FAP0]  Associated DQM=18 dir HOST2FAP
+[FAP0] ------------------<<<<
+[FAP0] SWQ: FAP2HOST_GSO_LOOPBACK
+[FAP0] >>>>------------------
+[FAP0] swq =80007ec0 msgSize =2 words , maxDepth=2048
+[FAP0] qStart =a5dc4000 qEnd=a5dc8000
+[FAP0] rdPtr =a5dc4000 wrPtr=a5dc4000 count=0
+[FAP0]  processed =0 dropped =0
+[FAP0]  Associated DQM=19 dir FAP2HOST
+[FAP0] ------------------<<<<
+[FAP0] FAP4KE GSO LOOPBACK Init Done...
+[FAP1] FAP BPM Initialized.
+[FAP0] FAP BPM Initialized.
+Broadcom Packet Flow Cache HW acceleration enabled.
+fapDrv_construct: FAP0: pManagedMemory=b0820650. wastage 8 bytes
+fapDrv_construct: FAP1: pManagedMemory=b0a20650. wastage 8 bytes
+bcmPktDma_bind: FAP Driver binding successfull
+[FAP0] FAP TM: ON
+[FAP1] FAP TM: ON
+bcmxtmcfg: bcmxtmcfg_init entry
+adsl: adsl_init entry
+Broadcom BCM63168D0 Ethernet Network Device v0.1 Jul 23 2016 18:51:43
+Broadcom GMAC Char Driver v0.1 Jul 23 2016 18:51:57 Registered<249>
+Broadcom GMAC Driver v0.1 Jul 23 2016 18:51:57 Initialized
+fapDrv_psmAlloc: fapIdx=1, size: 4800, offset=b0a20650 bytes remaining 7000
+ETH Init: Ch:0 - 200 tx BDs at 0xb0a20650
+fapDrv_psmAlloc: fapIdx=0, size: 4800, offset=b0820650 bytes remaining 7000
+ETH Init: Ch:1 - 200 tx BDs at 0xb0820650
+fapDrv_psmAlloc: wastage 8 bytes
+fapDrv_psmAlloc: fapIdx=0, size: 4808, offset=b0821910 bytes remaining 2184
+ETH Init: Ch:0 - 600 rx BDs at 0xb0821910
+[FAP0] enetRxChannel 0
+fapDrv_psmAlloc: wastage 8 bytes
+fapDrv_psmAlloc: fapIdx=1, size: 4808, offset=b0a21910 bytes remaining 2184
+ETH Init: Ch:1 - 600 rx BDs at 0xb0a21910
+[FAP1] enetRxChannel 1
+dgasp: kerSysRegisterDyingGaspHandler: bcmsw registered
+eth0: MAC Address: D8:D7:75:13:03:72
+eth1: MAC Address: D8:D7:75:13:03:72
+eth2: MAC Address: D8:D7:75:13:03:72
+eth3: MAC Address: D8:D7:75:13:03:72
+eth4: MAC Address: D8:D7:75:13:03:72
+NComm TMS V6.80 Kernel Module loaded.
+[NTC arl] arlEnable : Enabled ARL binding to FAP
+Broadcom Address Resolution Logic Processor (ARL) Char Driver v0.1 Jul 23 2016 18:47:36 Registered <245>
+Initializing USB Mass Storage driver...
+usbcore: registered new interface driver usb-storage
+USB Mass Storage support registered.
+--SMP support
+wl: dsl_tx_pkt_flush_len=338
+wl: norm_wmark_tot=3552, pktc_wmark_tot=2048
+Initializing WLCSM Module
+wl 0000:00:00.0: setting latency timer to 64
+wl: passivemode=1
+wl0: creating kthread wl0-kthrd
+wl0: creating timer kthread wl0-tmr-kthrd
+wl: napimode=0
+Neither SPROM nor OTP has valid image
+wl:srom/otp not programmed, using main memory mapped srom info(wombo board)
+wl:loading /etc/wlan/bcm6362_map.bin
+srom rev:8
+wl0: allocskbmode=1 currallocskbsz=512
++++++ Added gso loopback support for dev=wl0 <85da7800>
+wl0: Broadcom BCM435f 802.11 Wireless Controller 6.37.14.4803.cpe4.14L04.0-kdb
+dgasp: kerSysRegisterDyingGaspHandler: wl0 registered
+dect: Loading BCM/SC24200 DECT Stack
+dect: Version: , Build date: 2013/11/25, 11:54
+Loading DECT Shim driver
+Initialize DECT Shim layer....
+Obtained board id string (SI32261)
+Obtained Base board id string (F@ST3864V2)Successfully obtained voice parameters
+####################SUCCESS: DECT PLL IS LOCKED#################
+dect shm irq status: 0x00000080, i: 1
+DECT PLL init completed successfully
+DECT_CTRL->dect_shm_pll_reg_0   : 0x210064C0
+DECT_CTRL->dect_shm_pll_reg_1   : 0x00501015
+DECT_CTRL->dect_shm_pll_reg_2   : 0x60000000
+DECT_CTRL->dect_shm_pll_reg_3   : 0x11181808
+dect_shm_dma_ddr_saddr_tx_s0    : 0x00c10000
+dect_shm_dma_ddr_saddr_tx_s1    : 0x00c10140
+dect_shm_dma_ddr_saddr_tx_s2    : 0x00c10280
+dect_shm_dma_ddr_saddr_tx_s3    : 0x00c103c0
+dect_shm_dma_ddr_saddr_rx_s0    : 0x00c07000
+dect_shm_dma_ddr_saddr_rx_s1    : 0x00c07140
+dect_shm_dma_ddr_saddr_rx_s2    : 0x00c07280
+dect_shm_dma_ddr_saddr_rx_s3    : 0x00c073c0
+dect_shm_dma_ahb_saddr_tx_s01   : 0x0a200de0
+dect_shm_dma_ahb_saddr_tx_s23   : 0x11a01560
+dect_shm_dma_ahb_saddr_rx_s01   : 0x08400c00
+dect_shm_dma_ahb_saddr_rx_s23   : 0x0fc01380
+dect_shm_dma_offset_addr_tx_s01 : 0x00000000
+dect_shm_dma_offset_addr_rx_s01 : 0x00000000
+dect_shm_dma_xfer_size_tx       : 0x28282828
+dect_shm_dma_xfer_size_rx       : 0x28282828
+dect_shm_dma_buf_size_tx        : 0x02020202
+dect_shm_dma_buf_size_rx        : 0x02020202
+dect_shm_dma_xfer_cntr_tx       : 0x00000000
+dect_shm_dma_xfer_cntr_rx       : 0x00000000
+dect_shm_dma_ctrl               : 0x030088ff
+Loading PCM shim driver
+Endpoint: endpoint_init entry
+Endpoint: endpoint_init COMPLETED
+p8021ag: p8021ag_init entry
+Broadcom 802.1Q VLAN Interface, v0.1
+PCIe: No device found - Powering down
+Starting SWMDK...
+Note: Loading 6300 MDK (default) driver for 63168 chip
+Note: Forcing 53115 driver for 53125
+Switch MDK: num_switches = 2
+Switch MDK: unit = 0; phy_pbmp = 0x8; config_pbmp = 0x18
+Switch MDK: unit = 1; phy_pbmp = 0x1e; config_pbmp = 0x1e
+swmdk:error:27.558:link_poll_function:1026:Switch MDK link poll thread: unit=0; phypbmp=0x8 config_pbmp=0x18
+
+Saving kernel bootup messages for dumpsysinfo...
+Starting CMS smd...
+
+===== Release Version 8.353.1 (build timestamp 160723_1855) =====
+
+/bin/smd:error:27.803:symbol_to_value:372:Could not find symbol TELNETD2_PORT in eid_symbol_table
+Initializing CMS MDM in Hybrid98+181 mode
+eth3 (Ext switch port: 4) (Logical Port: 12) Link UP 100 mbps full duplex
+message received before monitor task is initialized kerSysSendtoMonitorTask
+ssk:error:35.198:lck_checkBeforeEntry:225:lBOS: Enter bosInit
+BOS: Exit bosInit
+endpoint_open COMPLETED
+ock required during cmsObj_getNextInSubTreeFlags
+Host MIPS Clock divider pwrsaving is enabled
+DDR Self Refresh pwrsaving is enabled
+Netfilter messages via NETLINK v0.30.
+ip_tables: (C) 2000-2006 Netfilter Core Team
+ip6_tables: (C) 2000-2006 Netfilter Core Team
+device eth0 entered promiscuous mode
+/bin/smd:error:42.563:collectApp:1460:Could not collect radvd (pid=702 timeout=5000ms), ret=9809.  Kill it with SIGKILL.
+ADDRCONF(NETDEV_UP): eth0: link is not ready
+device eth1 entered promiscuous mode
+ADDRCONF(NETDEV_UP): eth1: link is not ready
+device eth2 entered promiscuous mode
+ADDRCONF(NETDEV_UP): eth2: link is not ready
+device eth3 entered promiscuous mode
+br0: port 4(eth3) entered forwarding state
+br0: port 4(eth3) entered forwarding state
+*** dslThread dslPid=929
+BcmAdsl_Initialize=0xC02A4050, g_pFnNotifyCallback=0xC02DF0F0
+lmemhdr[2]=0x100CE000, pAdslLMem[2]=0x100CE000
+pSdramPHY=0xA7FFFFF8, 0x68CC 0xDEADBEEF
+*** XfaceOffset: 0x5FF90 => 0x5FF90 ***
+*** PhySdramSize got adjusted: 0xF3AAC => 0x127ED0 ***
+AdslCoreSharedMemInit: shareMemSize=41232(41232)
+AdslCoreHwReset:  pLocSbSta=84a40000 bkupThreshold=3072
+AdslCoreHwReset:  AdslOemDataAddr = 0xA7FB2560
+VersionInfo: A2pv6F039p.d26b
+***BcmDiagsMgrRegisterClient: 0 ***
+dgasp: kerSysRegisterDyingGaspHandler: dsl0 registered
+fapDrv_psmAlloc: fapIdx=1, size: 1600, offset=b0a22be0 bytes remaining 584
+XTM Init: Ch:0 - 200 rx BDs at 0xb0a22be0
+fapDrv_psmAlloc: fapIdx=1, size: 128, offset=b0a23220 bytes remaining 456
+XTM Init: Ch:1 - 16 rx BDs at 0xb0a23220
+bcmxtmrt: PTM/ATM Non-Bonding Mode configured in system
+ADDRCONF(NETDEV_UP): eth4: link is not ready
+insmod: can't insert '/lib/modules/3.4.11-rt19/kernel/net/ipv4/netfilter/ip_tables.ko': File exists
+insmod: can't insert '/lib/modules/3.4.11-rt19/kernel/net/ipv4/netfilter/iptable_filter.ko': File exists
+    Config Id fromonitor task is initialized pid= 471
+m Backup PSI is:    F5350_Optus_11.conf
+Jump out of script process because of backup PSI patch unavailable
+ssk:error:47.767:initVodslBoundIpIfWanSideUpLocked:851:Failed to get WAN Connection object
+starting pid 987, tty '': '-/bin/sh -l -c consoled'
+ssk:error:47.946:ssk_main:994:cannot handle msg type 0x10000802 from 20 (flags=0x2000f4d0)
+insmod: can't insert '/lib/modules/3.4.11-rt19/kernel/net/ipv4/ip_gre.ko': File exists
+BCM963268 Broadband Router
+WLmngr Daemon is running
+wlevt is ready for new msg...
+killall: hspotap: no process killed
+killall: bsd: no process killed
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: scan in progress ...
+acsd: selected channel spec: 0x100b
+There is no Predefined DevicePin in CFE
+WPS Device PIN = 16694248
+Setting SSID: "OPTUS_130372"
+Setting SSID: "wl0_Guest1"
+Setting SSID: "wl0_Guest2"
+Setting SSID: "wl0_Guest3"
+device wl0 is not a slave of br0
+device wl0 entered promiscuous mode
+br0: port 5(wl0) entered forwarding state
+br0: port 5(wl0) entered forwarding state
+mdmLibCtx idx =92
