@@ -44,6 +44,7 @@ The framework of the new device support has been made (see [the repo](https://gi
 2. LEDs are not defined in the device tree.
 3. WiFi does not work at the moment.
 4. ADSL/VDSL does not work.
+5. __Dump the DTB__. Currently, I cannot find the location of the device tree (DTB), the CFE boot loader does not seem to supply its path/address to the kernel. Extracting and decompiling the kernel may help solving TODO 1. Someone suggested that the DTB might be appended to the kernel image. We should try: https://github.com/PabloCastellano/extract-dtb or https://github.com/MoetaYuko/split-appended-dtb. See also: https://reverseengineering.stackexchange.com/questions/19495/re-zyxel-pmg5318-b20c-jffs2-vmlinux-lz.
 
 # References
 https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
