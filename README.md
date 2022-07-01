@@ -7,7 +7,7 @@ password: 0ptU%1M5
 If the above does not work, then try [the other keys](https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks).The management console offers a very limited set of commands, the `sh` command will drop you to a BusyBox Linux shell.
 
 # Known facts
-Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_bootlog.txt). The dumped stock firmware is also available in this repo, named `mtdblock?.bin`, where `?` is a number between 0 and 3. `cferam.000` and `vmlinux.lz` extracted from `mtdblock1.bin` seem to be the part of the CFE boot loader and the compressed Linux kernel, respectively.
+Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_bootlog.txt). The dumped stock firmware is also available in this repo, named `mtdblock?.bin`, where `?` is a number between 0 and 3. `cferam.000` and `vmlinux.lz` extracted from `mtdblock1.bin` seem to be the part of the CFE boot loader and the compressed Linux kernel, respectively. ["stock.config"](./stock.config) is the extracted compilation config of the stock kernel.
 ## Hardware configuration
 1. CPU: BCM63168D0, MIPS: 400MHz, DDR: 400MHz, Bus: 200MHz
 2. RAM: [NT5CC64M16GP-DI](https://www.nanya.com/en/Product/3747/NT5CC64M16GP-DI), DDR3 128MB
@@ -40,7 +40,7 @@ The framework of the new device support has been made (see [the repo](https://gi
 2. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
 
 ## TODOs
-1. __NONE of the LAN ports works once boot to the current OpenWRT build. (Fixing this should take the highest priority!)__ It is believed to be a device tree and boardinfo problem.
+1. __NONE of the LAN ports works once boot to the current OpenWRT build. (Fixing this should take the highest priority!)__ It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
 2. LEDs are not defined in the device tree.
 3. WiFi does not work at the moment.
 4. ADSL/VDSL does not work.
