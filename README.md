@@ -14,6 +14,7 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 3. NAND: [W29N01HVSINA](https://au.mouser.com/datasheet/2/949/w29n01hvxina_revc-1489886.pdf), TSOP1 package, 128MB, blocksize: 64 pages, page size: 2048 bytes + 64-byte OOB data.
 4. Switch: SOC built-in switch + BCM53125 (From boot log, the heatsink on the actual chip is too tight to be removed)
 5. Wifi: built-in?
+6. Other chips: [74HC164D](https://assets.nexperia.com/documents/data-sheet/74HC_HCT164.pdf), [LMX4181](https://www.renesas.com/in/en/products/interface-connectivity/wireless-communications/dect/lmx4181-high-frequency-dect-transceiver-standard-cmos-technology), [SI32260-C-FM1](https://au.mouser.com/datasheet/2/472/Si32260_61-2507288.pdf), [BCM6302](https://www.digikey.co.uk/en/products/detail/broadcom-limited/BCM6302KMLG/6147288)
 
 ## Network
 This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [OpenWRT source code](https://github.com/openwrt/openwrt/blob/dc2da6a23369c8da069321dcfd593a9cf8c993c6/target/linux/bcm63xx/patches-5.10/339-MIPS-BCM63XX-add-support-for-BCM63268.patch#L738) suggests), 3xFE, 1xGE, and 4xRGMII, all from a built-in switch. In this router, the GE port (id=3) is used for WAN RJ45 connection, the first RGMII (id=4) connects to an external switch (BCM53125?), all accessible LAN ports are from the external switch. __Why didn't they just simply connect 4 PHYs at the RGMIIs to make 4xGE LAN ports?__
@@ -25,7 +26,7 @@ This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [Op
 * DSL Bonding Led (D17): Green(480+9)
 * Power Led (D15): Green(480+20), Red(480+15)
 * DSL (D7): Green(?)
-* FXS (D11): Green(?), Red(?)
+* FXS (D11, Foreign Exchange Station, the phone ports, not to be confused with the xDSL port): Green(?), Red(?)
 * WPS Led (D13): Green(?), Red(?)
 * WPS button (SW3): (460+1)
 * WLAN button (SW2): (460+2)
