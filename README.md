@@ -18,7 +18,7 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 ## Network
 This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [OpenWRT source code](https://github.com/openwrt/openwrt/blob/dc2da6a23369c8da069321dcfd593a9cf8c993c6/target/linux/bcm63xx/patches-5.10/339-MIPS-BCM63XX-add-support-for-BCM63268.patch#L738) suggests), 3xFE, 1xGE, and 4xRGMII, all from a built-in switch. In this router, the GE port (id=3) is used for WAN RJ45 connection, the first RGMII (id=4) connects to an external switch (BCM53125?), all accessible LAN ports are from the external switch. __Why didn't they just simply connect 4 PHYs at the RGMIIs to make 4xGE LAN ports?__
 
-## LEDs
+## LEDs and Buttons
 * WAN Port: Yellow(460+6), Green(460+7)
 * WLAN Led (D12): (460+4) Logic or (460+5), this is weird!
 * Internet Led (D17): Green(480+8), Red(?)
@@ -27,6 +27,8 @@ This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [Op
 * DSL (D7): Green(?)
 * FXS (D11): Green(?), Red(?)
 * WPS Led (D13): Green(?), Red(?)
+* WPS button (SW3): (460+1)
+* WLAN button (SW2): (460+2)
 
 
 ## NAND partitions
