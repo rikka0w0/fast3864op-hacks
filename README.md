@@ -15,6 +15,18 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 4. External switch: BCM53125?
 5. Wifi: built-in?
 
+## LEDs
+* WAN Port: Yellow(460+6), Green(460+7)
+* WLAN Led (D12): (460+4) Logic or (460+5), this is weird!
+* Internet Led (D17): Green(480+8), Red(?)
+* DSL Bonding Led (D17): Green(480+9)
+* Power Led (D15): Green(480+20), Red(480+15)
+* DSL (D7): Green(?)
+* FXS (D11): Green(?), Red(?)
+* WPS Led (D13): Green(?), Red(?)
+
+
+
 ## NAND partitions
 Extracted from the boot log of the stock firmware:
 ```
