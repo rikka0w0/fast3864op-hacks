@@ -12,8 +12,11 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 1. CPU: BCM63168D0, MIPS: 400MHz, DDR: 400MHz, Bus: 200MHz
 2. RAM: [NT5CC64M16GP-DI](https://www.nanya.com/en/Product/3747/NT5CC64M16GP-DI), DDR3 128MB
 3. NAND: [W29N01HVSINA](https://au.mouser.com/datasheet/2/949/w29n01hvxina_revc-1489886.pdf), TSOP1 package, 128MB, blocksize: 64 pages, page size: 2048 bytes + 64-byte OOB data.
-4. External switch: BCM53125?
+4. Switch: SOC built-in switch + BCM53125 (From boot log, the heatsink on the actual chip is too tight to be removed)
 5. Wifi: built-in?
+
+## Network
+This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [OpenWRT source code](https://github.com/openwrt/openwrt/blob/dc2da6a23369c8da069321dcfd593a9cf8c993c6/target/linux/bcm63xx/patches-5.10/339-MIPS-BCM63XX-add-support-for-BCM63268.patch#L738) suggests), 3xFE, 1xGE, and 4xRGMII, all from a built-in switch. In this router, the GE port (id=3) is used for WAN RJ45 connection, the first RGMII (id=4) connects to an external switch (BCM53125?), all accessible LAN ports are from the external switch. __Why didn't they just simply connect 4 PHYs at the RGMIIs to make 4xGE LAN ports?__
 
 ## LEDs
 * WAN Port: Yellow(460+6), Green(460+7)
@@ -24,7 +27,6 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 * DSL (D7): Green(?)
 * FXS (D11): Green(?), Red(?)
 * WPS Led (D13): Green(?), Red(?)
-
 
 
 ## NAND partitions
@@ -48,15 +50,18 @@ Creating 6 MTD partitions on "brcmnand.0":
 The framework of the new device support has been made (see [the repo](https://github.com/rikka0w0/openwrt-fast3864op) and [work_with_openwrt.md](./work_with_openwrt.md) for instructions), including a patch for `board_bcm963xx.c`("openwrt/target/linux/bcm63xx/patches-5.4"), a new device tree("openwrt/target/linux/bcm63xx/dts/bcm63168-sagem-fast-3864op.dts"), a new make target("openwrt/target/linux/bcm63xx/image/bcm63xx_nand.mk", and new configuration scripts ("openwrt/target/linux/bcm63xx/base-files/etc/board.d/02_network").
 
 ## What's working
-1. The WAN port is functional, by default, it acts as a DHCP client. Note that the WAN port LEDs are not functional at the moment, see TODO 1.
-2. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
+1. The WAN port is functional, by default, it acts as a DHCP client. Note that the WAN port LEDs are not functional at the moment, see TODO 2.
+2. All LAN ports work, but VLAN tagging on the external switch does not work at all, see TODO 1.
+3. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
+4. `lspci` shows the root PCIE bridge, but the devices (should exist? If looking at the stock boot log...)
 
 ## TODOs
-1. __NONE of the LAN ports works once boot to the current OpenWRT build. (Fixing this should take the highest priority!)__ It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
-2. LEDs are not defined in the device tree.
-3. WiFi does not work at the moment.
-4. ADSL/VDSL does not work.
-5. __Dump the DTB__. Currently, I cannot find the location of the device tree (DTB), the CFE boot loader does not seem to supply its path/address to the kernel. Extracting and decompiling the kernel may help solving TODO 1. Someone suggested that the DTB might be appended to the kernel image. We should try: https://github.com/PabloCastellano/extract-dtb or https://github.com/MoetaYuko/split-appended-dtb. See also: https://reverseengineering.stackexchange.com/questions/19495/re-zyxel-pmg5318-b20c-jffs2-vmlinux-lz.
+1. VLAN tagging on the external switch. By looking at similar platforms, it is very likely that the external switch is controlled by the SOC via HSSPI or LSSPI. Howerver, there is still a chance that the external switch was left uncontrolled and the VLAN tagging won't be possible. It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). We are trying to probe both SPI interfaces for possible attached devices. The connection between the SOC and the external switch is surprisingly similar to [Sercomm H500S](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63167-sercomm-h500-s.dtsi). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
+2. LEDs are not defined in the device tree, some LED-GPIO relationship remains unknown.
+3. `lspci` shows no device attached.
+4. WiFi does not work at the moment.
+5. ADSL/VDSL does not work.
+6. __Dump the DTB__. Currently, I cannot find the location of the device tree (DTB), the CFE boot loader does not seem to supply its path/address to the kernel. Extracting and decompiling the kernel may help solving TODO 1. Someone suggested that the DTB might be appended to the kernel image. We should try: https://github.com/PabloCastellano/extract-dtb or https://github.com/MoetaYuko/split-appended-dtb. See also: https://reverseengineering.stackexchange.com/questions/19495/re-zyxel-pmg5318-b20c-jffs2-vmlinux-lz.
 
 # References
 https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
