@@ -50,3 +50,32 @@ ipv6                    pcmshim                 xz_dec
 ipw                     pktflow
 kernel                  printk
 ```
+
+The following is the output of `lspci` on the OpenWRT port:
+```
+root@OpenWrt:/sys/class/gpio# lspci -v
+00:00.0 PCI bridge: Broadcom Inc. and subsidiaries Device 6326 (rev 80) (prog-if 00 [Normal decode])
+        Flags: fast devsel, IRQ 48
+        Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+        I/O behind bridge: 00000000-00000fff [size=4K]
+        Memory behind bridge: [disabled]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [48] Power Management version 3
+        Capabilities: [ac] Express Root Port (Slot-), MSI 00
+        Capabilities: [100] Advanced Error Reporting
+        Kernel driver in use: pcieport
+lspci: Unable to load libkmod resources: error -12
+
+root@OpenWrt:/sys/bus/pci# ls devices/ -al
+drwxr-xr-x    2 root     root             0 Jan  1  1970 .
+drwxr-xr-x    5 root     root             0 Jan  1  1970 ..
+lrwxrwxrwx    1 root     root             0 Jan  1  1970 0000:00:00.0 -> ../../../devices/pci0000:00/0000:00:00.0
+
+root@OpenWrt:/sys/bus/pci# ls drivers/ -al
+drwxr-xr-x    6 root     root             0 Jul 11 10:51 .
+drwxr-xr-x    5 root     root             0 Jan  1  1970 ..
+drwxr-xr-x    2 root     root             0 Jul 11 10:52 b43-pci-bridge
+drwxr-xr-x    2 root     root             0 Jul 11 10:52 bcma-pci-bridge
+drwxr-xr-x    2 root     root             0 Jul 11 10:52 brcmfmac
+drwxr-xr-x    2 root     root             0 Jul 11 10:52 pcieport
+```

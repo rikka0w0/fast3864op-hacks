@@ -30,7 +30,10 @@ This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [Op
 * WPS Led (D13): Green(?), Red(?)
 * WPS button (SW3): (460+1)
 * WLAN button (SW2): (460+2)
-
+* Some LEDs are driven by 74HC164D:
+    * Clock (CP) = gpio0 (/sys/class/gpio/gpio480), serial_led_clk
+    * DSA (Data input) = gpio1 (/sys/class/gpio/gpio481), serial_led_data
+    * DSB (AND with DSA), MR(Output Async Reset) are pulled high.
 
 ## NAND partitions
 Extracted from the boot log of the stock firmware:
@@ -60,11 +63,13 @@ The framework of the new device support has been made (see [the repo](https://gi
 
 ## TODOs
 1. VLAN tagging on the external switch. By looking at similar platforms, it is very likely that the external switch is controlled by the SOC via HSSPI or LSSPI. Howerver, there is still a chance that the external switch was left uncontrolled and the VLAN tagging won't be possible. It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). We are trying to probe both SPI interfaces for possible attached devices. The connection between the SOC and the external switch is surprisingly similar to [Sercomm H500S](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63167-sercomm-h500-s.dtsi) and [Huawei HG635](https://openwrt.org/toh/huawei/hg635). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
+The switch cannot be connected on HSSPI.CS6 and HSSPI.CS7, as GPIO8 and GPIO9 are occupied by LEDs.
 2. LEDs are not defined in the device tree, some LED-GPIO relationship remains unknown.
 3. `lspci` shows no device attached.
 4. WiFi does not work at the moment.
 5. ADSL/VDSL does not work.
 6. __Dump the DTB__. Currently, I cannot find the location of the device tree (DTB), the CFE boot loader does not seem to supply its path/address to the kernel. Extracting and decompiling the kernel may help solving TODO 1. Someone suggested that the DTB might be appended to the kernel image. We should try: https://github.com/PabloCastellano/extract-dtb or https://github.com/MoetaYuko/split-appended-dtb. See also: https://reverseengineering.stackexchange.com/questions/19495/re-zyxel-pmg5318-b20c-jffs2-vmlinux-lz.
+7. [No driver to control the shift register 74HC164D?](https://forum.openwrt.org/t/adding-support-for-segamcom-f-st-3864op-missing-driver-for-74hc164d-led-expander/131836)
 
 # References
 https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
