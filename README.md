@@ -73,7 +73,7 @@ The switch cannot be connected on HSSPI.CS6 and HSSPI.CS7, as GPIO8 and GPIO9 ar
 7. [No driver to control the shift register 74HC164D?](https://forum.openwrt.org/t/adding-support-for-segamcom-f-st-3864op-missing-driver-for-74hc164d-led-expander/131836)
 
 # References
-https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
-https://openwrt.org/docs/techref/hardware/port.gpio
-https://forum.openwrt.org/t/bcm5325-switch-spi-on-bcm6358/85099/4
-https://forum.openwrt.org/t/b53-failed-to-detect-switch-on-bcm5358/20011
+* https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
+* https://openwrt.org/docs/techref/hardware/port.gpio
+* https://forum.openwrt.org/t/bcm5325-switch-spi-on-bcm6358/85099/4
+* https://forum.openwrt.org/t/b53-failed-to-detect-switch-on-bcm5358/20011
