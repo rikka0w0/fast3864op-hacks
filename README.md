@@ -20,16 +20,17 @@ Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_boo
 This router has 2 switches! The BCM63168D0 SOC has 8 internet interfaces (as [OpenWRT source code](https://github.com/openwrt/openwrt/blob/dc2da6a23369c8da069321dcfd593a9cf8c993c6/target/linux/bcm63xx/patches-5.10/339-MIPS-BCM63XX-add-support-for-BCM63268.patch#L738) suggests), 3xFE, 1xGE, and 4xRGMII, all from a built-in switch. In this router, the GE port (id=3) is used for WAN RJ45 connection, the first RGMII (id=4) connects to an external switch (BCM53125?), all accessible LAN ports are from the external switch. __Why didn't they just simply connect 4 PHYs at the RGMIIs to make 4xGE LAN ports?__
 
 ## LEDs and Buttons
-* WAN Port: Yellow(460+6), Green(460+7)
-* WLAN Led (D12): (460+4) Logic or (460+5), this is weird!
-* Internet Led (D17): Green(480+8), Red(?)
-* DSL Bonding Led (D17): Green(480+9)
-* Power Led (D15): Green(480+20), Red(480+15)
-* DSL (D7): Green(?)
-* FXS (D11, Foreign Exchange Station, the phone ports, not to be confused with the xDSL port): Green(?), Red(?)
-* WPS Led (D13): Green(?), Red(?)
-* WPS button (SW3): (460+1)
-* WLAN button (SW2): (460+2)
+* WAN Port: Yellow(460+6, gpio38), Green(460+7, gpio39)
+* WLAN Led (D12): (460+4, gpio36) Logic XOR (460+5, gpio37), this is weird!
+* Internet Led (D17): Green(480+8, gpio8), Red(74HC164D@Q2)
+* DSL Bonding Led (D17): Green(480+9, gpio9)
+* Power Led (D15): Green(480+20, gpio20), Red(480+15, gpio15)
+* DSL (D7): Green(74HC164D@Q3)
+* FXS (D11, Foreign Exchange Station, the phone ports, not to be confused with the xDSL port): Green(74HC164D@Q4), Red(74HC164D@Q5)
+* WPS Led (D13): Green(74HC164D@Q0), Red(74HC164D@Q1)
+* Reset button (SW5): (460+0, gpio32)
+* WPS button (SW3): (460+1, gpio33)
+* WLAN button (SW2): (460+2, gpio34)
 * Some LEDs are driven by 74HC164D:
     * Clock (CP) = gpio0 (/sys/class/gpio/gpio480), serial_led_clk
     * DSA (Data input) = gpio1 (/sys/class/gpio/gpio481), serial_led_data
@@ -64,7 +65,7 @@ The framework of the new device support has been made (see [the repo](https://gi
 ## TODOs
 1. VLAN tagging on the external switch. By looking at similar platforms, it is very likely that the external switch is controlled by the SOC via HSSPI or LSSPI. Howerver, there is still a chance that the external switch was left uncontrolled and the VLAN tagging won't be possible. It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). We are trying to probe both SPI interfaces for possible attached devices. The connection between the SOC and the external switch is surprisingly similar to [Sercomm H500S](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63167-sercomm-h500-s.dtsi) and [Huawei HG635](https://openwrt.org/toh/huawei/hg635). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
 The switch cannot be connected on HSSPI.CS6 and HSSPI.CS7, as GPIO8 and GPIO9 are occupied by LEDs.
-2. LEDs are not defined in the device tree, some LED-GPIO relationship remains unknown.
+2. WAN LEDs are not properly controlled.
 3. `lspci` shows no device attached.
 4. WiFi does not work at the moment.
 5. ADSL/VDSL does not work.
