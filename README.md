@@ -7,7 +7,7 @@ password: 0ptU%1M5
 If the above does not work, then try [the other keys](https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks).The management console offers a very limited set of commands, the `sh` command will drop you to a BusyBox Linux shell.
 
 # Known facts
-Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_bootlog.txt). The dumped stock firmware is also available in this repo, named `mtdblock?.bin`, where `?` is a number between 0 and 3. `cferam.000` and `vmlinux.lz` extracted from `mtdblock1.bin` seem to be the part of the CFE boot loader and the compressed Linux kernel, respectively. ["stock.config"](./stock.config) is the extracted compilation config of the stock kernel.
+Boot log of the stock firmware is available in ["stock_bootlog.txt"](./stock_bootlog.txt). The dumped stock firmware is also available in this repo, named `mtdblock?.bin`, where `?` is a number between 0 and 3. `cferam.000` and `vmlinux.lz` extracted from `mtdblock1.bin` seem to be the part of the CFE boot loader and the compressed Linux kernel, respectively. ["stock.config"](./stock.config) is the extracted compilation config of the stock kernel. The stock firmware does not seem to contain a DTB.
 ## Hardware configuration
 1. CPU: BCM63168D0, MIPS: 400MHz, DDR: 400MHz, Bus: 200MHz
 2. RAM: [NT5CC64M16GP-DI](https://www.nanya.com/en/Product/3747/NT5CC64M16GP-DI), DDR3 128MB
@@ -53,11 +53,27 @@ Creating 6 MTD partitions on "brcmnand.0":
 4. `0x000007b00000-0x000007f00000 : "data"`: an 256kB JFFS2 partition with unknown usage. See `mtdblock3.bin`.
 5. The "image" and "image_update" partitions are mapped to "rootfs" and "rootfs_update", respectively, not sure why they are there.
 
-# Current Progress
+# Current Progress (BMIPS target)
+The BMIPS target fully supports DTS and external MDIO. See [the repo](https://github.com/rikka0w0/openwrt-fast3864op/tree/3864_latest).
+
+## What's working
+1. The WAN port is functional, by default, it acts as a DHCP client.
+2. The `mdio` tool can monitor the port status of both the internal and the external switches.
+3. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
+4. `lspci` shows the root PCIE bridge, but the devices (should exist? If looking at the stock boot log...)
+
+## TODOs
+1. [The internal and the external switches cannot co-exist, if both are described in the dts, then the system hangs during boot.](https://github.com/openwrt/openwrt/issues/10313)
+2. WAN LEDs control needs improvement.
+3. `lspci` shows no device attached.
+4. WiFi does not work at the moment.
+5. ADSL/VDSL does not work.
+
+# Current Progress (BCM63XX target, deprecated?)
 The framework of the new device support has been made (see [the repo](https://github.com/rikka0w0/openwrt-fast3864op) and [work_with_openwrt.md](./work_with_openwrt.md) for instructions), including a patch for `board_bcm963xx.c`("openwrt/target/linux/bcm63xx/patches-5.4"), a new device tree("openwrt/target/linux/bcm63xx/dts/bcm63168-sagem-fast-3864op.dts"), a new make target("openwrt/target/linux/bcm63xx/image/bcm63xx_nand.mk", and new configuration scripts ("openwrt/target/linux/bcm63xx/base-files/etc/board.d/02_network").
 
 ## What's working
-1. The WAN port is functional, by default, it acts as a DHCP client. Note that the WAN port LEDs are not functional at the moment, see TODO 2.
+1. The WAN port is functional, by default, it acts as a DHCP client.
 2. All LAN ports work, but VLAN tagging on the external switch does not work at all, see TODO 1.
 3. All USB ports are working as expected. Additional kernel modules may be required to operate the USB devices.
 4. `lspci` shows the root PCIE bridge, but the devices (should exist? If looking at the stock boot log...)
@@ -65,12 +81,10 @@ The framework of the new device support has been made (see [the repo](https://gi
 ## TODOs
 1. VLAN tagging on the external switch. By looking at similar platforms, it is very likely that the external switch is controlled by the SOC via HSSPI or LSSPI. Howerver, there is still a chance that the external switch was left uncontrolled and the VLAN tagging won't be possible. It is believed to be a device tree and boardinfo problem. It is still not clear about the connection between the SOC and the external switch (53125?). We are trying to probe both SPI interfaces for possible attached devices. The connection between the SOC and the external switch is surprisingly similar to [Sercomm H500S](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63167-sercomm-h500-s.dtsi) and [Huawei HG635](https://openwrt.org/toh/huawei/hg635). [bcm63169-comtrend-vg-8050](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm63169-comtrend-vg-8050.dts), [bcm6369-comtrend-wap-5813n](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6369-comtrend-wap-5813n.dts) and [bcm6362-huawei-hg253s-v2](https://github.com/openwrt/openwrt/blob/ec6293febc244d187e71a6e54f44920be679cde4/target/linux/bcm63xx/dts/bcm6362-huawei-hg253s-v2.dts) may provide some hints. An [image](https://openwrt.org/_detail/media/huawei/hg253sv2-front.jpg?id=toh%3Ahuawei%3Ahg253s_v2) of Huawei HG253s-V2.
 The switch cannot be connected on HSSPI.CS6 and HSSPI.CS7, as GPIO8 and GPIO9 are occupied by LEDs.
-2. WAN LEDs are not properly controlled.
+2. WAN LEDs control needs improvement.
 3. `lspci` shows no device attached.
 4. WiFi does not work at the moment.
 5. ADSL/VDSL does not work.
-6. __Dump the DTB__. Currently, I cannot find the location of the device tree (DTB), the CFE boot loader does not seem to supply its path/address to the kernel. Extracting and decompiling the kernel may help solving TODO 1. Someone suggested that the DTB might be appended to the kernel image. We should try: https://github.com/PabloCastellano/extract-dtb or https://github.com/MoetaYuko/split-appended-dtb. See also: https://reverseengineering.stackexchange.com/questions/19495/re-zyxel-pmg5318-b20c-jffs2-vmlinux-lz.
-7. [No driver to control the shift register 74HC164D?](https://forum.openwrt.org/t/adding-support-for-segamcom-f-st-3864op-missing-driver-for-74hc164d-led-expander/131836)
 
 # References
 * https://github.com/mattimustang/optus-sagemcom-fast-3864-hacks/issues/27
